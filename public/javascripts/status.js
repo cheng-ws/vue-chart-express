@@ -6,5 +6,6 @@ const status = {
     553: '账号或密码错误',
     554: '参数错误',
     555: '无数据',
+    556: '用户已存在'
 };
 module.exports = status;
