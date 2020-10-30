@@ -1,11 +1,21 @@
+// const express = require('express');
+// const app = express();
+// const path = require('path');
+// const server = require('http').createServer(app);
+// const server = require('http').Server(app);
+// const PORT = 300010;
+// app.use(express.static(path.join(__dirname, '../', 'public')));
+// const io = require('socket.io')(server);
+// io.listen('8081');
+
 const _ = require('underscore');
 const moment = require('moment');
 const userData = require('./users.json');
 const USER_STATUS = ['ONLINE','OFFLINE'];
 const users = {};
-module.exports = server => {
-    const io = require('socket.io')(server);
+module.exports = () => {
     io.on('connection',socket=>{
+        console.log('server');
         socket.on('online',username => {
             socket.username = username;
             users[username] = {
