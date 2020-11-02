@@ -5,6 +5,7 @@ const moment = require('moment');
 const userData = require('./users.json');
 const USER_STATUS = ['ONLINE','OFFLINE'];
 const users = {};
+const chatList = {};
 //获取io
 socketIo.getSocketIo = function (io) {
    // let io = socket_io.listen(server);
@@ -32,10 +33,10 @@ socketIo.getSocketIo = function (io) {
        //       //      socket.broadcast.emit('onLineUser',users); // 发送给其他人
        //       //  });
        //私发
-       socket.on('private_chat',(data)=>{
+       socket.on('privateChat',(data)=>{
            let params = JSON.parse(data);
            console.log(params);
-           const receiver = users[params.receiverUser];
+           const receiver = users[params.receiver];
            params.createTime = moment().format('YYYY-MM-DD HH:mm:ss');
            // const senderData = _.findWhere(userData,{username: params.sender});
            // params.senderPhoto = (senderData || {}).photo;
@@ -46,9 +47,10 @@ socketIo.getSocketIo = function (io) {
            // fn(params);
            console.log(receiver);
            if(receiver && receiver.status === USER_STATUS[0]) {
-               socket.to(users[params.receiverUser].socketId).emit('reply_private_chat',params);
+               socket.to(users[params.receiver].socketId).emit('replyPrivateChat',params); //发送给对方
+               // socket.to(users[params.receiver].socketId).emit('reply_private_chat',params);
            }else {
-               console.log(`${params.receiverUser}不在线`);
+               console.log(`${params.receiver}不在线`);
            }
        });
        //用户信息
