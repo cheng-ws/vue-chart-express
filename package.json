@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "mongo": "nodemon ./index.js",
+    "copyfile": "nodemon ./assets/fs/copyfiles.js"
   },
   "dependencies": {
     "async": "^3.2.0",

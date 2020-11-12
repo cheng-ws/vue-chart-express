@@ -6,7 +6,7 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 // var flash = require("connect-flash");
 
-var routes = require("./routes/mongoR/routes");
+var routes = require("./routes/mongoR/routes/login");
 var app = express();
 
 // 连接到你MongoDB服务器的test数据库

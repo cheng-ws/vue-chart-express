@@ -42,9 +42,9 @@ userSchema.pre("save",function (done) {
         });
     });
 });
-userSchema.methods.checksPassword = function (guess,done) {
+userSchema.methods.checkPassword = function (guess,done) {
    bcrypt.compare(guess,this.password,function (err,isMatch) {
-       done(err,isMatch);
+       return  done(err,isMatch);
    });
 };
 const User = mongoose.model("User",userSchema);
