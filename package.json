@@ -5,7 +5,10 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "mongo": "nodemon ./index.js",
-    "copyfile": "nodemon ./assets/fs/copyfiles.js"
+    "copyfile": "nodemon ./assets/fs/copyfiles.js",
+    "shell": "nodemon ./assets/fs/shell.js",
+    "filter": "nodemon ./assets/fun/filter.js",
+    "tree": "nodemon ./assets/fun/tree.js"
   },
   "dependencies": {
     "async": "^3.2.0",

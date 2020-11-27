@@ -6,6 +6,7 @@ let newPath = 'C:/Users/chengws/Desktop/photo';
 var filePath = path.resolve(files);
 let newFilePath = path.resolve(newPath);
 // console.log(path.join(__dirname,'public'));
+let timer = "";
 //比较文件，并删除
 function compareImage (params) {
     // console.log(params);
@@ -49,7 +50,7 @@ function compareImage (params) {
                     let secondPath = path.join(newFilePath, item.name);
                     delFile(secondPath).then(res => {
                         console.log(res);
-                    }).catch((err)=> {
+                    }).catch((err) => {
                         console.log(err);
                     });
                 }
@@ -80,6 +81,7 @@ function compareImage (params) {
     });
 
 }
+
 //删除重复文件
 function delFile (path) {
     return new Promise((resolve, reject) => {
@@ -97,14 +99,14 @@ function delFile (path) {
 
 //文件遍历，以及复制
 function fileDisplay (filePath) {
-    let count = Math.ceil(Math.random() * 1000000);
-    fs.readdir(newFilePath, function (err, files) {
-        if (err) {
-            count = Math.ceil(Math.random() * 1000000);
-        } else {
-            count = files.length + 1;
-        }
-    });
+    let count = Date.now();
+    // fs.readdir(newFilePath, function (err, files) {
+    //     if (err) {
+    //         count = Math.ceil(Math.random() * 1000000);
+    //     } else {
+    //         count = files.length + 1;
+    //     }
+    // });
     //根据文件路径读取文件，返回文件列表
     fs.readdir(filePath, function (err, files) {
         if (err) {
@@ -143,9 +145,23 @@ function fileDisplay (filePath) {
     });
 }
 
-//调用文件遍历方法
-// setInterval(() => {
-//     fileDisplay(filePath);
-// }, 1000 * 60);
-
-compareImage(newFilePath);
+// 调用文件遍历方法
+function copyfile () {
+    let timer = setInterval(() => {
+        //调用比较文件
+        let time = new Date();
+        let hour = time.getHours();
+        // console.log(hour);
+        if(hour > 18) {
+            console.log('时间已过期');
+            compareImage(newFilePath);
+            clearInterval(timer);
+        }else {
+            console.log('时间未过期');
+            fileDisplay(filePath);
+        }
+    }, 1000 * 60 * 10);
+}
+// 复制文件
+copyfile();
+// pkg -t win
