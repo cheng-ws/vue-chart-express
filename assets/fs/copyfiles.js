@@ -147,20 +147,38 @@ function fileDisplay (filePath) {
 
 // 调用文件遍历方法
 function copyfile () {
+    let time = new Date();
+    let hour = time.getHours();
+    if(hour > 18) {
+        console.log('时间已过期');
+        compareImage(newFilePath);
+        let timeout = setTimeout(()=>{
+            clearInterval(timer);
+            clearTimeout(timeout);
+        },100);
+
+    }else {
+        console.log('时间未过期');
+        fileDisplay(filePath);
+    }
     let timer = setInterval(() => {
         //调用比较文件
         let time = new Date();
         let hour = time.getHours();
-        // console.log(hour);
+        console.log(hour);
         if(hour > 18) {
             console.log('时间已过期');
             compareImage(newFilePath);
-            clearInterval(timer);
+            let timeout = setTimeout(()=>{
+                clearInterval(timer);
+                clearTimeout(timeout);
+            },100);
+
         }else {
             console.log('时间未过期');
             fileDisplay(filePath);
         }
-    }, 1000 * 60 * 10);
+    }, 1000*60);
 }
 // 复制文件
 copyfile();

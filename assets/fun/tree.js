@@ -34,3 +34,20 @@ function treeForeach (tree, func) {
     }
 }
 treeForeach(tree, node=>{console.log(node.title)});
+// 深度优先遍历
+// 先序
+function treeForeach (tree, func) {
+  tree.forEach(data =>{
+      func(data);
+      data.children && treeForeach(data.children, func); //遍历子树
+  });
+}
+//后序
+function treeAfter (tree, func) {
+   tree.forEach(data=>{
+       data.children && treeAfter(data.children, func); //遍历子树
+       func(data);
+   });
+}
+treeForeach(tree, node=>{console.log(node.title)});
+treeAfter(tree, node=>{console.log(node.title)});

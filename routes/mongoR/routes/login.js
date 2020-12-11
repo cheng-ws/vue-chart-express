@@ -149,7 +149,7 @@ router.post('/signdown',function (req,res,next) {
         utils.outPut(res, 500, null, '退出失败，请重试');
     })
 });
-router.get('/userlist', function (req, res, next) {
+router.post('/userlist', function (req, res, next) {
     new Promise((resolve, reject) => {
         // 0,不显示，1，显示
         User.find({}, {password: 0}).exec((err, result) => {
@@ -161,7 +161,7 @@ router.get('/userlist', function (req, res, next) {
         });
     }).then((result) => {
         if (result) {
-            utils.outPut(res, 200, result, '用户列表查询成功');
+            utils.outPut(res, 200, {list:result,page:{}}, '用户列表查询成功');
         } else {
             utils.outPut(res, 500, null, '用户列表查询失败');
         }
